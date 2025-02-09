@@ -1,0 +1,16 @@
+{
+  "name": "guess-the-word",
+  "version": "1.0.0",
+  "description": "![Thumbnail for the Guess The Word Game coding challenge](./thumbnail.jpg)",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./input.css -o ./main/output.css",
+    "watch": "npx tailwindcss -i ./input.css -o ./main/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

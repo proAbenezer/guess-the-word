@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./main/output.css" />
+    <script src="script.js" defer></script>
+    <title>Guess The Word Game</title>
+  </head>
+  <body class="w-full h-screen flex items-center justify-center">
+    <div
+      id="container"
+      class="w-[25rem] bg-midnightBlack flex flex-col items-center space-y-8 px-8 py-6 rounded-xl"
+    >
+      <img src="./resources/word-scramblle-logo.svg" alt="" />
+
+      <div
+        id="text-box"
+        class="w-full min-h-28 bg-steelGray font-bold text-softCloud text-2xl py-4 px-6 rounded tracking-[16px] md:w-[95%] flex items-center justify-center flex-wrap"
+      ></div>
+      <div class="w-full flex items-center justify-between md:w-[95%]">
+        <div class="text-softCloud font-bold text-sm flex items-center gap-x-2">
+          <h1 class="flex items-center">
+            Tries <span id="tries">(4/5)</span>:
+          </h1>
+          <div id="tries-box" class="flex gap-x-[.4rem]">
+            <div
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+            ></div>
+            <div
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+            ></div>
+            <div
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+            ></div>
+            <div
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+            ></div>
+            <div
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+            ></div>
+          </div>
+        </div>
+        <h2 class="text-softCloud font-bold text-sm">
+          Mistakes: <span id="mistakes"></span>
+        </h2>
+      </div>
+      <form
+        novalidate
+        id="input-field-container"
+        class="w-[95%] flex items-center justify-center gap-2 flex-wrap py-6"
+      >
+        <button type="submit"></button>
+      </form>
+      <template id="input-field-template">
+        <input
+          autocomplete="off"
+          type="text"
+          class="text-center w-11 h-11 rounded-lg bg-transparent text-softCloud text-2xl border-2 border-[#636568] outline-none caret-transparent"
+        />
+      </template>
+      <div class="w-[95%] flex items-center justify-center flex-wrap gap-4">
+        <button
+          id="checkBtn"
+          class="w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
+        >
+          Check
+        </button>
+        <button
+          id="randomBtn"
+          class="w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
+        >
+          Random
+        </button>
+        <!--      <button
+          id="restart"
+          class="w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
+        >
+          Restart
+        </button> -->
+      </div>
+      <div id="message" class="text-center font-bold"></div>
+    </div>
+  </body>
+</html>
