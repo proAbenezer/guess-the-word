@@ -71,9 +71,6 @@ function handleInput(event) {
   //handling user Input
   inputBoxes.forEach((box, index) => {
     box.addEventListener("input", (e) => {
-      let typedChar = e.target.value.slice(0, 1);
-
-      e.target.value = typedChar;
       if (e.target.value && index < inputBoxes.length - 1) {
         inputBoxes[index + 1].focus();
         inputBoxes[index].removeAttribute("id");
@@ -86,6 +83,7 @@ function handleInput(event) {
   inputBoxes.forEach((box, index) => {
     box.addEventListener("keydown", (e) => {
       if (e.key === "Backspace" && !box.value && index > 0) {
+        e.target.value = "";
         inputBoxes[index - 1].focus();
         inputBoxes[index - 1].setAttribute("id", "active-input");
         inputBoxes[index].removeAttribute("id");
