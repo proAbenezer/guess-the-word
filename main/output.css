@@ -618,6 +618,10 @@ video {
   height: 100vh;
 }
 
+.min-h-28 {
+  min-height: 7rem;
+}
+
 .w-11 {
   width: 2.75rem;
 }
@@ -630,8 +634,8 @@ video {
   width: .4rem;
 }
 
-.w-\[25rem\] {
-  width: 25rem;
+.w-\[20rem\] {
+  width: 20rem;
 }
 
 .w-\[95\%\] {
@@ -640,6 +644,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[25rem\] {
+  width: 25rem;
+}
+
+.w-\[23rem\] {
+  width: 23rem;
 }
 
 .flex-col {
@@ -852,5 +864,15 @@ button {
 @media (min-width: 768px) {
   .md\:w-\[95\%\] {
     width: 95%;
+  }
+
+  .md\:min-w-\[22rem\] {
+    min-width: 22rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:min-w-\[25rem\] {
+    min-width: 25rem;
   }
 }
