@@ -14,42 +14,46 @@
     <script src="script.js" defer></script>
     <title>Guess The Word Game</title>
   </head>
-  <body class="w-full h-screen flex items-center justify-center">
+  <body class="w-full min-h-screen flex items-center justify-center">
     <div
       id="container"
-      class="w-[20rem] bg-midnightBlack flex flex-col items-center space-y-8 px-8 py-6 rounded-xl md:min-w-[22rem] lg:min-w-[25rem]"
+      class="w-[22rem] bg-midnightBlack flex flex-col items-center space-y-8 px-8 py-6 rounded-xl md:min-w-[23rem]"
     >
       <img src="./resources/word-scramblle-logo.svg" alt="" />
 
       <div
-        id="text-box"
-        class="w-full min-h-28 bg-steelGray font-bold text-softCloud text-2xl py-4 px-6 rounded tracking-[16px] md:w-[95%] flex items-center justify-center flex-wrap"
-      ></div>
+        id="randomWordContainer"
+        class="flex items-center justify-center text-[#F2F5F9] bg-[#4A5567] py-4 text-2xl tracking-[15px] text-center rounded-md min-w-52 mb-3"
+      >
+        <h1 id="randomWord" class="w-[300px] break-words overflow-hidden">
+          aflsdfjlsdfjlsdfj
+        </h1>
+      </div>
       <div class="w-full flex items-center justify-between md:w-[95%]">
         <div class="text-softCloud font-bold text-sm flex items-center gap-x-2">
-          <h1 class="flex items-center">
+          <h1 class="text-for-xs flex items-center">
             Tries <span id="tries">(4/5)</span>:
           </h1>
           <div id="tries-box" class="flex gap-x-[.4rem]">
             <div
-              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-deepViolet"
             ></div>
             <div
-              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-deepViolet"
             ></div>
             <div
-              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-deepViolet"
             ></div>
             <div
-              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-deepViolet"
             ></div>
             <div
-              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-steelGray"
+              class="w-[.4rem] h-[.4rem] mt-[.1rem] rounded-full bg-deepViolet"
             ></div>
           </div>
         </div>
-        <h2 class="text-softCloud font-bold text-sm">
-          Mistakes: <span id="mistakes"></span>
+        <h2 class="text-for-xs text-softCloud font-bold text-sm">
+          High Score: <span id="highScore">0</span>
         </h2>
       </div>
       <form
@@ -67,18 +71,21 @@
           class="text-center w-11 h-11 rounded-lg bg-transparent text-softCloud text-2xl border-2 border-[#636568] outline-none caret-transparent"
         />
       </template>
-      <div class="w-[95%] flex items-center justify-center flex-wrap gap-4">
+      <div
+        id="buttonContainer"
+        class="w-[95%] flex items-center justify-center flex-wrap gap-4"
+      >
         <button
           id="checkBtn"
-          class="w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
+          class="text-for-xs w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
         >
           Check
         </button>
         <button
-          id="randomBtn"
-          class="w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
+          id="restart"
+          class="text-for-xs w-32 h-10 bg-brightOrchid font-bold text-1xl text-white rounded-lg"
         >
-          Random
+          Restart
         </button>
         <!--      <button
           id="restart"
