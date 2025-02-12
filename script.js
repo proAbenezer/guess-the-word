@@ -23,6 +23,7 @@ fetch("./words.json")
 let currentWord = "";
 let tries = 5;
 let highScore = 0;
+let score = 0;
 let mistakesIndexes = [];
 triesElement.innerHTML = `(${tries}/5)`;
 function scrambleWord(word) {
@@ -39,7 +40,7 @@ function scrambleWord(word) {
 }
 
 function generateRandomWord() {
-  setTimeout(() => (message.innerHTML = ""), 2000);
+  setTimeout(() => (message.innerHTML = ""), 5000);
   // Generate and display scrambled word
   const randomWordIndex = Math.floor(Math.random() * words.length);
   currentWord = words[randomWordIndex];
@@ -56,64 +57,65 @@ function createInputFields(length) {
     inputFieldContainer.appendChild(inputFieldTemplateClone);
   }
   const inputFieldElements = inputFieldContainer.querySelectorAll("input");
-  inputFieldContainer[0].focus();
-  inputFieldElements[0].setAttribute("id", "active-input");
-  addBoxesBahvior(inputFieldElements);
+
+  addBoxesBehavior(inputFieldElements);
 }
 
-function addBoxesBahvior(boxes) {
+function addBoxesBehavior(boxes) {
+  let activeBox = null; // Track active box
+
+  activeBox = boxes[0];
+  activeBox.focus();
+  activeBox.setAttribute("id", "active-input");
   boxes.forEach((box, index) => {
     box.addEventListener("click", () => {
-      boxes.forEach((box, index) => {
-        box.removeAttribute("id");
-      });
+      if (activeBox) activeBox.removeAttribute("id");
       box.setAttribute("id", "active-input");
       box.focus();
+      activeBox = box;
     });
+
     box.addEventListener("input", (e) => {
       if (e.target.value.length === 1 && index < boxes.length - 1) {
-        box.removeAttribute("id");
-        boxes[index + 1].setAttribute("id", "active-input");
-        boxes[index + 1].focus();
+        moveFocus(index + 1);
       }
     });
 
     box.addEventListener("keydown", (e) => {
-      if (e.key === "Backspace" && index > 0) {
-        boxes[index - 1].focus();
-        boxes[index - 1].setAttribute("id", "active-input");
-        box.removeAttribute("id");
-        e.target.value = "";
-      } else if (e.key === "Backspace" && index === 0) {
-        e.target.value = "";
-      }
+      box.addEventListener("keydown", (e) => {
+        if (e.key === "Backspace") {
+          e.preventDefault();
 
-      if (e.key === "ArrowLeft" && index > 0) {
-        box.removeAttribute("id");
-        boxes[index - 1].focus();
-        boxes[index - 1].setAttribute("id", "active-input");
-      }
-
-      if (e.key === "ArrowRight" && index < boxes.length - 1) {
-        box.removeAttribute("id");
-        boxes[index + 1].setAttribute("id", "active-input");
-        boxes[index + 1].focus();
-      }
+          if (box.value) {
+            box.value = "";
+          } else if (index > 0) {
+            moveFocus(index - 1);
+          }
+        } else if (e.key === "ArrowLeft" && index > 0) {
+          moveFocus(index - 1);
+        } else if (e.key === "ArrowRight" && index < boxes.length - 1) {
+          moveFocus(index + 1);
+        }
+      });
     });
   });
+  function moveFocus(newIndex) {
+    if (activeBox) activeBox.removeAttribute("id");
+    setTimeout(() => boxes[newIndex].focus(), 10);
+    boxes[newIndex].setAttribute("id", "active-input");
+    activeBox = boxes[newIndex];
+  }
 }
-function handleInput(event) {}
 
 function checkAnswer(boxes) {
   let userInput = "";
-  let score = 0;
 
   //check if the boxes are all filled
   for (let i = 0; i < boxes.length; i++) {
     if (boxes[i].value === null || boxes[i].value === "") {
-      tries--;
-      message.innerHTML = "please fill out all of the words";
-      message.style.color = "yellow";
+      message.innerHTML =
+        "Do I look like stupid to you? Fill it out, master. I know nothing!";
+      message.style.color = "#9E9E9E";
       return;
     }
   }
@@ -127,10 +129,14 @@ function checkAnswer(boxes) {
   //check answer
   if (userInput !== currentWord) {
     if (tries === 0) {
+      tries = 5;
+      triesElement.innerHTML = "(5/5)";
+      clearTryBoxes();
+      score = 0;
       return restart();
     }
-    message.innerHTML = "wrong answer try again";
-    message.style.color = "red";
+    message.innerHTML = "You’re incorrect, loser. What are you, a 4th grader?";
+    message.style.color = "#D32F2F";
     for (let i = 0; i < currentWord.length; i++) {
       if (currentWord[i] !== userInput[i]) {
         boxes[i].classList.add("wrongAnswer");
@@ -141,8 +147,9 @@ function checkAnswer(boxes) {
     highScore = highScore >= score ? highScore : score;
     highScoreElement.innerHTML = highScore;
     triesElement.innerHTML = "(5/5)";
-    message.innerHTML = "You won";
-    message.style.color = "green";
+    message.innerHTML =
+      "Well, you barely made it alive this time. Next time, I’ll kill you myself!";
+    message.style.color = "#388E3C";
     generateRandomWord();
   }
 }
@@ -165,7 +172,6 @@ function clearTryBoxes() {
     box.classList.add("bg-deepViolet");
   });
 }
-window.addEventListener("keypress", handleInput);
 
 checkWordBtn.addEventListener("click", () => {
   checkAnswer(inputFieldContainer.querySelectorAll("input"));
